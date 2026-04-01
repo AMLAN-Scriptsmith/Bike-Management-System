@@ -3,20 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "^5.3.8",
+    "framer-motion": "^12.38.0",
     "react": "^19.1.1",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.1",
+    "react-hook-form": "^7.72.0",
+    "react-icons": "^5.6.0",
+    "react-router-dom": "^7.9.2",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "setup:env": "node scripts/quickStartSetup.js",
+    "install:all": "npm install && npm --prefix backend install",
+    "free:ports": "kill-port 3000 5000 || echo Ports already free",
+    "prestart:all": "npm --prefix backend run db:init && npm --prefix backend run db:setup && npm --prefix backend run db:test && npm run free:ports",
+    "start:all": "concurrently -k -n BACKEND,FRONTEND -c green,cyan \"npm --prefix backend run dev\" \"npm start\"",
+    "up": "npm run setup:env && npm run install:all && npm run prestart:all && npm run start:all",
+    "up:quick": "npm run up"
   },
   "eslintConfig": {
     "extends": [
@@ -35,5 +50,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "kill-port": "^2.0.1",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.93.2",
+    "sass-loader": "^13.3.3"
   }
 }

@@ -1,0 +1,138 @@
+.app-modern {
+  --m-bg: #f4f7fb;
+  --m-surface: #ffffff;
+  --m-surface-soft: #f8fbff;
+  --m-text: #10243f;
+  --m-muted: #5f6f86;
+  --m-accent: #ff7a1a;
+  --m-accent-2: #21d2a4;
+  --m-border: rgba(15, 35, 63, 0.16);
+  min-height: 100vh;
+  background: radial-gradient(circle at 8% 10%, #e7f2ff 0%, #f4f7fb 42%, #ecf3ff 100%);
+  color: var(--m-text);
+}
+
+.app-modern .container,
+.app-modern [class*="dashboard"],
+.app-modern [class*="Dashboard"],
+.app-modern [class*="panel"],
+.app-modern [class*="card"] {
+  color: inherit;
+}
+
+.app-modern .container {
+  background: transparent;
+}
+
+.app-modern .card,
+.app-modern .cu-card,
+.app-modern .manager-card,
+.app-modern .report-card,
+.app-modern .inventory-card,
+.app-modern .technician-card,
+.app-modern .reception-card,
+.app-modern .customer-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(247, 251, 255, 0.96));
+  border: 1px solid var(--m-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(16, 36, 63, 0.08);
+}
+
+.app-modern .btn,
+.app-modern button:not(.welcome-btn):not(.login-submit-btn):not(.register-submit-btn):not(.otp-btn) {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.app-modern .btn-primary,
+.app-modern .btn-success,
+.app-modern .btn-info,
+.app-modern .cu-btn.primary,
+.app-modern .primary-btn {
+  background: linear-gradient(120deg, var(--m-accent), #ff5a1f);
+  border-color: transparent;
+  color: #1b0d02;
+  font-weight: 700;
+}
+
+.app-modern .btn-outline-secondary,
+.app-modern .btn-secondary,
+.app-modern .cu-btn {
+  background: rgba(15, 35, 63, 0.06);
+  color: var(--m-text);
+  border-color: rgba(15, 35, 63, 0.2);
+}
+
+.app-modern table,
+.app-modern .table,
+.app-modern .cu-table {
+  color: var(--m-text);
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(15, 35, 63, 0.16);
+}
+
+.app-modern .table th,
+.app-modern .table td,
+.app-modern .cu-table th,
+.app-modern .cu-table td {
+  border-color: rgba(15, 35, 63, 0.14);
+}
+
+.app-modern input,
+.app-modern select,
+.app-modern textarea,
+.app-modern .form-control {
+  background: #ffffff;
+  border: 1px solid rgba(15, 35, 63, 0.22);
+  color: var(--m-text);
+  border-radius: 10px;
+}
+
+.app-modern input:focus,
+.app-modern select:focus,
+.app-modern textarea:focus,
+.app-modern .form-control:focus {
+  border-color: var(--m-accent-2);
+  box-shadow: 0 0 0 3px rgba(33, 210, 164, 0.2);
+  outline: none;
+}
+
+.app-modern h1,
+.app-modern h2,
+.app-modern h3,
+.app-modern h4,
+.app-modern h5,
+.app-modern h6 {
+  color: var(--m-text);
+}
+
+.app-modern p,
+.app-modern small,
+.app-modern label {
+  color: var(--m-muted);
+}
+
+.app-modern .text-muted {
+  color: var(--m-muted);
+}
+
+.app-modern .badge {
+  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.app-modern .modern-topbar {
+  border: 1px solid var(--m-border);
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(247, 251, 255, 0.92));
+  box-shadow: 0 10px 20px rgba(16, 36, 63, 0.08);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .app-modern {
+    padding-bottom: 1rem;
+  }
+}

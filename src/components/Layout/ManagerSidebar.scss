@@ -1,0 +1,198 @@
+// Manager Sidebar Styles
+.manager-sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+
+  .sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .logo-icon {
+        font-size: 1.5rem;
+        display: inline-flex;
+
+        svg {
+          width: 1em;
+          height: 1em;
+        }
+      }
+
+      .logo-text {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: white;
+      }
+    }
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 20px 0;
+
+    .nav-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      .nav-item {
+        margin-bottom: 4px;
+
+        &.active {
+          .nav-link {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border-right: 3px solid #60a5fa;
+
+            .nav-icon {
+              transform: scale(1.1);
+            }
+          }
+        }
+
+        .nav-link {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 20px;
+          color: rgba(255, 255, 255, 0.8);
+          text-decoration: none;
+          transition: all 0.3s ease;
+          border-radius: 0 25px 25px 0;
+          margin-right: 8px;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateX(4px);
+
+            .nav-icon {
+              transform: scale(1.1);
+            }
+          }
+
+          .nav-icon {
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+
+            svg {
+              width: 1em;
+              height: 1em;
+            }
+          }
+
+          .nav-label {
+            font-weight: 500;
+            font-size: 0.95rem;
+          }
+        }
+      }
+    }
+  }
+
+  .sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+
+      .user-details {
+        .user-name {
+          font-weight: 600;
+          font-size: 0.95rem;
+          color: white;
+        }
+
+        .user-role {
+          font-size: 0.8rem;
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .manager-sidebar {
+    width: 100%;
+    min-height: 0;
+    flex-direction: row;
+    
+    .sidebar-header {
+      padding: 16px;
+      
+      .logo-text {
+        display: none;
+      }
+    }
+    
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 0;
+      
+      .nav-menu {
+        display: flex;
+        overflow-x: auto;
+        
+        .nav-item {
+          margin-bottom: 0;
+          margin-right: 4px;
+          
+          .nav-link {
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px 12px;
+            margin-right: 0;
+            border-radius: 8px;
+            min-width: 60px;
+            text-align: center;
+            
+            .nav-label {
+              font-size: 0.7rem;
+            }
+          }
+        }
+      }
+    }
+    
+    .sidebar-footer {
+      padding: 16px;
+      
+      .user-info {
+        .user-details {
+          display: none;
+        }
+      }
+    }
+  }
+}

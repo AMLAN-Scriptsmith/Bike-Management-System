@@ -1,0 +1,158 @@
+You are a senior full-stack developer. Build a complete backend and database system for the following project:
+
+Project: Bike Service Center Job Management System
+
+Tech Stack:
+- Backend: Node.js with Express.js
+- Database: MySQL (use MySQL Workbench schema)
+- Authentication: JWT-based authentication
+- ORM: Sequelize (or use raw SQL if needed)
+- API Style: RESTful APIs
+- Architecture: MVC (Models, Controllers, Routes)
+
+IMPORTANT:
+Frontend (Welcome, Register, Sign-in, Manager Dashboard) is already built.
+Now create backend APIs + database + integration support.
+
+-----------------------------------
+1. DATABASE DESIGN (MySQL)
+-----------------------------------
+Create SQL schema with proper relationships:
+
+Tables:
+- users (id, name, email, password, role, phone, created_at)
+- service_centers (id, name, location, admin_id)
+- bikes (id, user_id, model, number_plate, brand)
+- job_cards (id, bike_id, service_center_id, status, assigned_to, created_at, updated_at)
+- services (id, name, price, description)
+- job_services (id, job_id, service_id, status)
+- spare_parts (id, name, stock, price)
+- parts_usage (id, job_id, part_id, quantity)
+- invoices (id, job_id, total_amount, payment_status, payment_method)
+- payments (id, invoice_id, amount, method, transaction_id)
+- feedback (id, user_id, job_id, rating, comment)
+
+Add:
+- Primary keys, foreign keys
+- Indexes where needed
+- Sample seed data
+
+-----------------------------------
+2. AUTHENTICATION SYSTEM
+-----------------------------------
+- Implement JWT login system
+- Password hashing using bcrypt
+- Role-based middleware:
+  - Super Admin
+  - Manager
+  - Receptionist
+  - Technician
+  - Customer
+
+-----------------------------------
+3. API MODULES
+-----------------------------------
+
+A. Auth APIs
+- POST /api/auth/register
+- POST /api/auth/login
+- GET /api/auth/profile
+
+B. Customer APIs
+- Register bike
+- View service history
+- Track job status
+- Give feedback
+
+C. Job Management APIs
+- Create job card
+- Assign technician
+- Update job status
+- Get job details
+- List jobs (filter by status)
+
+D. Technician APIs
+- View assigned jobs
+- Update progress
+- Request spare parts
+- Upload notes
+
+E. Inventory APIs
+- Add/update spare parts
+- Track stock
+- Allocate parts to jobs
+
+F. Billing APIs
+- Generate invoice
+- Calculate total (services + parts)
+- Process payment (mock Razorpay)
+- Update payment status
+
+G. Reports APIs
+- Daily jobs report
+- Revenue report
+- Technician performance
+
+-----------------------------------
+4. BACKEND STRUCTURE
+-----------------------------------
+Generate project structure:
+
+/project-root
+  /config (db config)
+  /models
+  /controllers
+  /routes
+  /middlewares
+  /utils
+  /services
+  app.js
+
+-----------------------------------
+5. BUSINESS LOGIC
+-----------------------------------
+- Job status flow:
+  Pending → Assigned → In Progress → Waiting for Parts → Completed
+- Auto-update inventory when parts used
+- Invoice auto-generated after completion
+- Customer notified (mock notification function)
+
+-----------------------------------
+6. SECURITY
+-----------------------------------
+- Use JWT middleware
+- Protect routes based on roles
+- Validate inputs using express-validator
+
+-----------------------------------
+7. EXTRA FEATURES
+-----------------------------------
+- Add pagination and filtering
+- Add search (by bike number, customer name)
+- Add logging middleware
+
+-----------------------------------
+8. OUTPUT REQUIREMENT
+-----------------------------------
+- Generate full working backend code
+- Provide SQL schema separately
+- Include sample API responses
+- Include instructions to connect frontend with backend
+
+-----------------------------------
+9. BONUS (IF POSSIBLE)
+-----------------------------------
+- Add WebSocket (Socket.io) for real-time job updates
+- Add file upload (Multer) for technician photos
+- Add Swagger API documentation
+
+-----------------------------------
+
+Now generate:
+1. MySQL schema
+2. Backend code (models, controllers, routes)
+3. Auth middleware
+4. Sample API endpoints
+5. Setup instructions
+
+Ensure clean, production-ready, modular code.
