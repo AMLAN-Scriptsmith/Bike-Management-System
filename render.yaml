@@ -11,22 +11,20 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 5000
       - key: JWT_EXPIRES_IN
         value: 1d
       - key: FRONTEND_URL
         value: https://bike-service-frontend.onrender.com
       - key: DB_HOST
-        sync: false
+        value: REPLACE_WITH_DB_HOST
       - key: DB_PORT
-        sync: false
+        value: "3306"
       - key: DB_NAME
-        sync: false
+        value: REPLACE_WITH_DB_NAME
       - key: DB_USER
-        sync: false
+        value: REPLACE_WITH_DB_USER
       - key: DB_PASSWORD
-        sync: false
+        value: REPLACE_WITH_DB_PASSWORD
       - key: JWT_SECRET
         generateValue: true
       - key: PAYMENT_GATEWAY_PROVIDER
@@ -34,29 +32,28 @@ services:
       - key: PAYMENT_CURRENCY
         value: INR
       - key: RAZORPAY_KEY_ID
-        sync: false
+        value: ""
       - key: RAZORPAY_KEY_SECRET
-        sync: false
+        value: ""
       - key: TWILIO_ACCOUNT_SID
-        sync: false
+        value: ""
       - key: TWILIO_AUTH_TOKEN
-        sync: false
+        value: ""
       - key: TWILIO_VERIFY_SERVICE_SID
-        sync: false
+        value: ""
 
   - type: static
     name: bike-service-frontend
     rootDir: .
     buildCommand: npm install && npm run build
     staticPublishPath: build
-    pullRequestPreviewsEnabled: false
     envVars:
       - key: REACT_APP_API_BASE_URL
         value: https://bike-service-backend.onrender.com/api
       - key: REACT_APP_PAYMENT_GATEWAY_PROVIDER
         value: MOCK
       - key: REACT_APP_RAZORPAY_KEY_ID
-        sync: false
+        value: ""
     routes:
       - type: rewrite
         source: /*
