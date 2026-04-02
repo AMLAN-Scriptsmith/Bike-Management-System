@@ -42,11 +42,12 @@ services:
       - key: TWILIO_VERIFY_SERVICE_SID
         value: ""
 
-staticSites:
-  - name: bike-service-frontend
+  - type: web
+    name: bike-service-frontend
+    env: static
     rootDir: .
     buildCommand: npm install && npm run build
-    publishPath: build
+    staticPublishPath: build
     envVars:
       - key: REACT_APP_API_BASE_URL
         value: https://bike-service-backend.onrender.com/api
