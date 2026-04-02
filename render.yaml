@@ -42,8 +42,8 @@ services:
       - key: TWILIO_VERIFY_SERVICE_SID
         value: ""
 
-  - type: static
-    name: bike-service-frontend
+staticSites:
+  - name: bike-service-frontend
     rootDir: .
     buildCommand: npm install && npm run build
     staticPublishPath: build

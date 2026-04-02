@@ -59,6 +59,6 @@ Example:
    - `customer@test.com / 1234`
 
 ## Notes
-- First backend startup runs DB auth on boot.
+- First backend startup authenticates, creates tables, and seeds demo data if the database is empty.
 - For best reliability, use a managed MySQL provider (not local machine DB).
 - If frontend cannot reach API, verify `REACT_APP_API_BASE_URL` and backend `FRONTEND_URL`.

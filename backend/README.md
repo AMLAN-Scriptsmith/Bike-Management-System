@@ -37,10 +37,9 @@ backend/
 3. Install dependencies:
    - `npm install`
 4. Create DB/tables:
-   - Run `sql/schema.sql` in MySQL Workbench
+   - Run `npm run db:setup` to create tables and seed demo data, or start the server and let it bootstrap automatically on first launch
 5. Seed sample data:
-   - Option A: run `sql/seed.sql` in MySQL Workbench
-   - Option B: run `npm run seed` for Sequelize seeded data
+   - Optional rerun: `npm run seed`
 6. Start server:
    - `npm run dev`
 
@@ -54,8 +53,7 @@ backend/
    - Password: your MySQL password
    - Default Schema: `bike_service_center`
 3. Test the Workbench connection and save it.
-4. Run `sql/schema.sql` in Workbench to create tables.
-5. Optional: run `sql/seed.sql` for sample data.
+4. Optional: if you prefer SQL Workbench, you can still run `sql/schema.sql` and `sql/seed.sql`, but the app can also bootstrap itself.
 
 ## Verify Backend DB Connectivity
 

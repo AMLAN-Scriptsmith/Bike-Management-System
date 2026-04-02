@@ -21,7 +21,6 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-    "my-app": "file:..",
     "mysql2": "^3.11.5",
     "sequelize": "^6.37.5",
     "socket.io": "^4.8.1",
