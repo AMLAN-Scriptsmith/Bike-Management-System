@@ -1,6 +1,18 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
+const useSsl = String(process.env.DB_SSL || "false").toLowerCase() === "true";
+const rejectUnauthorized = String(process.env.DB_SSL_REJECT_UNAUTHORIZED || "false").toLowerCase() === "true";
+
+const dialectOptions = useSsl
+  ? {
+      ssl: {
+        require: true,
+        rejectUnauthorized,
+      },
+    }
+  : {};
+
 const sequelize = new Sequelize(
   process.env.DB_NAME || "bike_service_center",
   process.env.DB_USER || "root",
@@ -10,6 +22,7 @@ const sequelize = new Sequelize(
     port: Number(process.env.DB_PORT || 3306),
     dialect: "mysql",
     logging: false,
+    dialectOptions,
     define: {
       underscored: true,
       timestamps: true,

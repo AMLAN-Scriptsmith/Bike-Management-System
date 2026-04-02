@@ -25,6 +25,8 @@ Set these in Render backend service:
 - `DB_NAME`
 - `DB_USER`
 - `DB_PASSWORD`
+- `DB_SSL` (`true` for TiDB and many managed MySQL providers)
+- `DB_SSL_REJECT_UNAUTHORIZED` (`false` for providers using managed certificates)
 - `JWT_SECRET` (auto-generated in blueprint, can override)
 
 Optional (only if used):
