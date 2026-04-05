@@ -54,7 +54,7 @@ services:
     staticPublishPath: build
     envVars:
       - key: REACT_APP_API_BASE_URL
-        value: https://bike-service-backend.onrender.com/api
+        value: https://bike-service-backend-tfh8.onrender.com/api
       - key: REACT_APP_PAYMENT_GATEWAY_PROVIDER
         value: MOCK
       - key: REACT_APP_RAZORPAY_KEY_ID
