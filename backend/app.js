@@ -11,7 +11,20 @@ const swaggerSpec = require("./config/swagger");
 
 const app = express();
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'", "https:"],
+        imgSrc: ["'self'", "data:", "blob:", "https:"],
+        connectSrc: ["'self'", "https:"],
+      },
+    },
+  })
+);
 app.use(
   cors({
     origin: process.env.FRONTEND_URL || "http://localhost:3000",
