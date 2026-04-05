@@ -2,10 +2,10 @@ services:
   - type: web
     name: bike-service-backend
     env: node
-    rootDir: backend
+    rootDir: .
     plan: free
-    buildCommand: npm install
-    startCommand: npm start
+    buildCommand: npm install && npm --prefix backend install && npm run build
+    startCommand: npm --prefix backend start
     healthCheckPath: /health
     autoDeploy: true
     envVars:
@@ -14,7 +14,9 @@ services:
       - key: JWT_EXPIRES_IN
         value: 1d
       - key: FRONTEND_URL
-        value: https://bike-service-frontend.onrender.com
+        value: https://bike-service-backend-tfh8.onrender.com
+      - key: REACT_APP_API_BASE_URL
+        value: /api
       - key: DB_HOST
         value: gateway01.ap-southeast-1.prod.aws.tidbcloud.com
       - key: DB_PORT
@@ -45,21 +47,3 @@ services:
         value: ""
       - key: TWILIO_VERIFY_SERVICE_SID
         value: ""
-
-  - type: web
-    name: bike-service-frontend
-    env: static
-    rootDir: .
-    buildCommand: npm install && npm run build
-    staticPublishPath: build
-    envVars:
-      - key: REACT_APP_API_BASE_URL
-        value: https://bike-service-backend-tfh8.onrender.com/api
-      - key: REACT_APP_PAYMENT_GATEWAY_PROVIDER
-        value: MOCK
-      - key: REACT_APP_RAZORPAY_KEY_ID
-        value: ""
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html

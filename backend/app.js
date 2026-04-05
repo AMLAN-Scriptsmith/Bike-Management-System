@@ -30,6 +30,17 @@ app.get("/health", (req, res) => {
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api", apiRoutes);
 
+const frontendBuildPath = path.resolve(__dirname, "../build");
+app.use(express.static(frontendBuildPath));
+
+app.get("*", (req, res, next) => {
+  const bypassPaths = ["/api", "/api-docs", "/health", "/uploads"];
+  if (bypassPaths.some((prefix) => req.path.startsWith(prefix))) {
+    return next();
+  }
+  return res.sendFile(path.join(frontendBuildPath, "index.html"));
+});
+
 app.use(notFoundHandler);
 app.use(errorHandler);
 
