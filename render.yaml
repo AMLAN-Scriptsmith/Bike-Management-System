@@ -16,15 +16,15 @@ services:
       - key: FRONTEND_URL
         value: https://bike-service-frontend.onrender.com
       - key: DB_HOST
-        value: REPLACE_WITH_DB_HOST
+        value: host-gateway01.ap-southeast-1.prod.aws.tidbcloud.com
       - key: DB_PORT
-        value: "3306"
+        value: "4000"
       - key: DB_NAME
-        value: REPLACE_WITH_DB_NAME
+        value: test
       - key: DB_USER
-        value: REPLACE_WITH_DB_USER
+        value: 3NuTc1jKNDwjp5E.root
       - key: DB_PASSWORD
-        value: REPLACE_WITH_DB_PASSWORD
+        value: tr9FTds0V6zBsEj9
       - key: DB_SSL
         value: "true"
       - key: DB_SSL_REJECT_UNAUTHORIZED
