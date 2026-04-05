@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: bike-service-backend
+    name: bike-service-management
     env: node
     rootDir: .
     plan: free
@@ -14,7 +14,7 @@ services:
       - key: JWT_EXPIRES_IN
         value: 1d
       - key: FRONTEND_URL
-        value: https://bike-service-backend-tfh8.onrender.com
+        value: https://bike-service-management.onrender.com
       - key: REACT_APP_API_BASE_URL
         value: /api
       - key: DB_HOST
