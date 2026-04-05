@@ -39,7 +39,7 @@ Optional (only if used):
 ## Required frontend env vars
 Set these in Render static service:
 - `REACT_APP_API_BASE_URL`
-  - Example: `https://bike-service-backend.onrender.com/api`
+   - Example: `https://bike-mangement-system.onrender.com/api`
 
 Optional:
 - `REACT_APP_RAZORPAY_KEY_ID`
@@ -48,7 +48,7 @@ Optional:
 Backend `FRONTEND_URL` must exactly match your deployed frontend origin.
 
 Example:
-- `FRONTEND_URL=https://bike-service-frontend.onrender.com`
+- `FRONTEND_URL=https://bike-mangement-system.onrender.com`
 
 ## Post-deploy verification
 1. Backend health: `GET /health`
