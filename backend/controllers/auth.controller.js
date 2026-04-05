@@ -4,28 +4,6 @@ const { success, failure } = require("../utils/apiResponse");
 const { signToken } = require("../utils/token");
 const { ROLES } = require("../utils/constants");
 
-const formatPhoneForOtp = (phone) => {
-  const normalized = `${phone || ""}`.trim().replace(/\s+/g, "");
-  if (!normalized) return null;
-  if (normalized.startsWith("+")) return normalized;
-  if (/^\d{10}$/.test(normalized)) return `+91${normalized}`;
-  return null;
-};
-
-const getTwilioVerifyService = () => {
-  const sid = process.env.TWILIO_ACCOUNT_SID;
-  const authToken = process.env.TWILIO_AUTH_TOKEN;
-  const verifyServiceSid = process.env.TWILIO_VERIFY_SERVICE_SID;
-
-  if (!sid || !authToken || !verifyServiceSid) {
-    return null;
-  }
-
-  const twilio = require("twilio");
-  const client = twilio(sid, authToken);
-  return { client, verifyServiceSid };
-};
-
 const register = async (req, res) => {
   try {
     const { name, email, password, role = ROLES.CUSTOMER, phone } = req.body;
@@ -101,59 +79,6 @@ const login = async (req, res) => {
   }
 };
 
-const sendPhoneOtp = async (req, res) => {
-  try {
-    const { phone } = req.body;
-    const to = formatPhoneForOtp(phone);
-    if (!to) {
-      return failure(res, "Phone must be a valid 10-digit number or E.164 format", 400);
-    }
-
-    const service = getTwilioVerifyService();
-    if (!service) {
-      return failure(res, "OTP provider is not configured on server", 503);
-    }
-
-    await service.client.verify.v2
-      .services(service.verifyServiceSid)
-      .verifications.create({ to, channel: "sms" });
-
-    return success(res, "OTP sent successfully", { phone: to });
-  } catch (error) {
-    return failure(res, "Failed to send OTP", 500, [error.message]);
-  }
-};
-
-const verifyPhoneOtp = async (req, res) => {
-  try {
-    const { phone, code } = req.body;
-    const to = formatPhoneForOtp(phone);
-    if (!to) {
-      return failure(res, "Phone must be a valid 10-digit number or E.164 format", 400);
-    }
-    if (!code || !/^\d{4,8}$/.test(code)) {
-      return failure(res, "OTP code is invalid", 400);
-    }
-
-    const service = getTwilioVerifyService();
-    if (!service) {
-      return failure(res, "OTP provider is not configured on server", 503);
-    }
-
-    const check = await service.client.verify.v2
-      .services(service.verifyServiceSid)
-      .verificationChecks.create({ to, code });
-
-    if (check.status !== "approved") {
-      return failure(res, "OTP verification failed", 401);
-    }
-
-    return success(res, "OTP verified", { verified: true });
-  } catch (error) {
-    return failure(res, "Failed to verify OTP", 500, [error.message]);
-  }
-};
-
 const profile = async (req, res) => {
   return success(res, "Profile fetched", { user: req.user });
 };
@@ -161,7 +86,5 @@ const profile = async (req, res) => {
 module.exports = {
   register,
   login,
-  sendPhoneOtp,
-  verifyPhoneOtp,
   profile,
 };

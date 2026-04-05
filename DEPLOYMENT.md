@@ -30,9 +30,6 @@ Set these in Render backend service:
 - `JWT_SECRET` (auto-generated in blueprint, can override)
 
 Optional (only if used):
-- `TWILIO_ACCOUNT_SID`
-- `TWILIO_AUTH_TOKEN`
-- `TWILIO_VERIFY_SERVICE_SID`
 - `RAZORPAY_KEY_ID`
 - `RAZORPAY_KEY_SECRET`
 

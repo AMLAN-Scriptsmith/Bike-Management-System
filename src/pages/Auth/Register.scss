@@ -281,6 +281,17 @@
   font-size: 0.8rem;
 }
 
+.register-helper-text {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #4b5563;
+  background: #f8fbff;
+  border: 1px dashed #c7d7ef;
+  border-radius: 10px;
+  padding: 0.6rem 0.7rem;
+}
+
 .password-meter {
   margin-top: -0.1rem;
 }
@@ -315,36 +326,6 @@
   margin-top: 0.35rem;
   color: #475569;
   font-size: 0.78rem;
-}
-
-.otp-group {
-  border: 1px solid #d7e2f0;
-  border-radius: 12px;
-  padding: 0.55rem;
-  background: #f8fbff;
-}
-
-.otp-actions {
-  margin-top: 0.35rem;
-  display: flex;
-  gap: 0.4rem;
-}
-
-.otp-btn {
-  border: 1px solid #a7c5ef;
-  border-radius: 9px;
-  padding: 0.35rem 0.55rem;
-  font-size: 0.78rem;
-  font-weight: 700;
-  background: #ecf4ff;
-  color: #1d4ed8;
-  cursor: pointer;
-}
-
-.otp-btn-verify {
-  border-color: #90d6b6;
-  background: #ebfff4;
-  color: #0f766e;
 }
 
 .register-terms {
@@ -469,7 +450,7 @@
   }
 
   .register-inline-group {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -510,8 +491,7 @@
   color: #cfdaec;
 }
 
-.theme-dark .register-input-shell,
-.theme-dark .otp-group {
+.theme-dark .register-input-shell {
   border-color: #334155;
   background: #132238;
 }
@@ -519,16 +499,19 @@
 .theme-dark .register-input-shell input,
 .theme-dark .register-input-shell select,
 .theme-dark .register-social-btn,
-.theme-dark .register-footer a,
-.theme-dark .otp-btn {
+.theme-dark .register-footer a {
   color: #e8eef8;
 }
 
-.theme-dark .register-social-btn,
-.theme-dark .otp-btn,
-.theme-dark .otp-group {
+.theme-dark .register-social-btn {
   border-color: #334155;
   background: #162842;
+}
+
+.theme-dark .register-helper-text {
+  color: #cbd5e1;
+  background: #132238;
+  border-color: #334155;
 }
 
 .theme-dark .register-toggle:hover {

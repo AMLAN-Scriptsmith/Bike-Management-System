@@ -18,7 +18,7 @@ import {
 	FiTool,
 	FiUser,
 } from "react-icons/fi";
-import { registerUser, sendPhoneOtp, verifyPhoneOtp } from "../../api/authApi";
+import { registerUser } from "../../api/authApi";
 import {
 	PasswordStrengthMeter,
 	RegisterInputField,
@@ -37,7 +37,6 @@ const schema = yup.object({
 		.string()
 		.oneOf([yup.ref("password")], "Passwords do not match")
 		.required("Confirm password is required"),
-	phoneOtp: yup.string().required("Phone OTP is required"),
 	agreeTerms: yup.boolean().oneOf([true], "You must accept terms and privacy policy"),
 });
 
@@ -49,7 +48,6 @@ const defaultValues = {
 	preferredServiceType: "",
 	password: "",
 	confirmPassword: "",
-	phoneOtp: "",
 	agreeTerms: false,
 };
 
@@ -63,9 +61,6 @@ const Register = () => {
 		watch,
 		reset,
 		setValue,
-		getValues,
-		setError,
-		clearErrors,
 		formState: { errors, isValid, isSubmitting },
 	} = useForm({
 		resolver: yupResolver(schema),
@@ -88,77 +83,12 @@ const Register = () => {
 	const [theme, setTheme] = useState("dark");
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-	const [otpLoading, setOtpLoading] = useState({ sending: false, verifying: false });
-	const [otpState, setOtpState] = useState({
-		phoneSent: false,
-		phoneVerified: false,
-	});
 
 	const password = watch("password");
-	const canSubmit = isValid && otpState.phoneVerified && !isSubmitting;
-
-	const handleSendPhoneOtp = async () => {
-		const phone = getValues("phone");
-		if (!phone) {
-			setError("phone", { type: "manual", message: "Phone is required first" });
-			return;
-		}
-
-		setOtpLoading((prev) => ({ ...prev, sending: true }));
-		clearErrors("phone");
-		try {
-			const response = await sendPhoneOtp(phone);
-			if (!response?.success) {
-				setFeedback({ type: "error", message: response?.message || "Unable to send OTP." });
-				return;
-			}
-
-			setOtpState((prev) => ({
-				...prev,
-				phoneSent: true,
-				phoneVerified: false,
-			}));
-			setFeedback({ type: "info", message: "OTP sent to your phone number." });
-		} catch (error) {
-			setFeedback({ type: "error", message: error.message || "Unable to send OTP." });
-		} finally {
-			setOtpLoading((prev) => ({ ...prev, sending: false }));
-		}
-	};
-
-	const handleVerifyPhoneOtp = async () => {
-		const phone = getValues("phone");
-		const code = getValues("phoneOtp");
-		if (!phone || !code) {
-			setError("phoneOtp", { type: "manual", message: "Enter OTP code first" });
-			return;
-		}
-
-		setOtpLoading((prev) => ({ ...prev, verifying: true }));
-		try {
-			const response = await verifyPhoneOtp(phone, code);
-			if (!response?.success) {
-				setError("phoneOtp", { type: "manual", message: response?.message || "OTP verification failed." });
-				return;
-			}
-
-			clearErrors("phoneOtp");
-			setOtpState((prev) => ({ ...prev, phoneVerified: true }));
-			setFeedback({ type: "success", message: "Phone verified successfully." });
-		} catch (error) {
-			setError("phoneOtp", { type: "manual", message: error.message || "OTP verification failed." });
-		} finally {
-			setOtpLoading((prev) => ({ ...prev, verifying: false }));
-		}
-	};
+	const canSubmit = isValid && !isSubmitting;
 
 	const onSubmit = async (form) => {
 		setFeedback({ type: "", message: "" });
-
-		if (!otpState.phoneVerified) {
-			setFeedback({ type: "error", message: "Please verify phone OTP before submitting." });
-			return;
-		}
 
 		try {
 			const payload = {
@@ -177,10 +107,6 @@ const Register = () => {
 
 			setFeedback({ type: "success", message: "Registration successful. Redirecting to login..." });
 			reset(defaultValues);
-			setOtpState({
-				phoneSent: false,
-				phoneVerified: false,
-			});
 
 			setTimeout(() => navigate("/login"), 1200);
 		} catch (err) {
@@ -260,24 +186,7 @@ const Register = () => {
 							register={register}
 							error={errors.phone}
 						/>
-						<div className="otp-group">
-							<RegisterInputField
-								id="phoneOtp"
-								label="Phone OTP"
-								placeholder="6-digit OTP"
-								register={register}
-								error={errors.phoneOtp}
-								disabled={!otpState.phoneSent}
-							/>
-							<div className="otp-actions">
-								<button type="button" className="otp-btn" onClick={handleSendPhoneOtp} disabled={otpLoading.sending}>
-									{otpLoading.sending ? "Sending..." : "Send OTP"}
-								</button>
-								<button type="button" className="otp-btn otp-btn-verify" onClick={handleVerifyPhoneOtp} disabled={otpLoading.verifying || !otpState.phoneSent}>
-									{otpLoading.verifying ? "Verifying..." : otpState.phoneVerified ? "Verified" : "Verify"}
-								</button>
-							</div>
-						</div>
+						<p className="register-helper-text">Phone verification is not required. Your number is used for service updates only.</p>
 					</div>
 
 					<div className="register-grid-two">

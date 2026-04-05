@@ -42,25 +42,6 @@ router.post(
   authController.login
 );
 
-router.post(
-  "/otp/send-phone",
-  [
-    body("phone").notEmpty().withMessage("Phone is required"),
-  ],
-  validateRequest,
-  authController.sendPhoneOtp
-);
-
-router.post(
-  "/otp/verify-phone",
-  [
-    body("phone").notEmpty().withMessage("Phone is required"),
-    body("code").isLength({ min: 4, max: 8 }).withMessage("OTP code is required"),
-  ],
-  validateRequest,
-  authController.verifyPhoneOtp
-);
-
 /**
  * @swagger
  * /api/auth/profile:

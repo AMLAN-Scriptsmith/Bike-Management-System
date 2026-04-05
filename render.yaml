@@ -41,9 +41,3 @@ services:
         value: ""
       - key: RAZORPAY_KEY_SECRET
         value: ""
-      - key: TWILIO_ACCOUNT_SID
-        value: ""
-      - key: TWILIO_AUTH_TOKEN
-        value: ""
-      - key: TWILIO_VERIFY_SERVICE_SID
-        value: ""
